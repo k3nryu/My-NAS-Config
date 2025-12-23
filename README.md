@@ -1,7 +1,7 @@
 # My-NAS-Config
 NAS配置（Git + Ansible Vault + ZFS）设计/重建说明书
 
-## 1️⃣ README.md —— 灾难恢复的“入口按钮”
+##  README.md —— 灾难恢复的“入口按钮”
 
 这是我们 OS 崩了以后唯一需要打开的文件。
 
@@ -19,27 +19,7 @@ NAS配置（Git + Ansible Vault + ZFS）设计/重建说明书
 
 ---
 
-## 2️⃣ etc/ —— “我们期望系统长这样”
-
-etc/ 的原则（非常重要）
-
-etc 不是备份，而是“声明”
-
-每个文件都满足：
-
-我们能解释它存在的原因
-
-我们希望它在每次恢复后都一样
-
-例如：
-
-- smb.conf ✅
-- sysctl.d/99-nas.conf ✅
-- sshd_config（如果你改过）✅
-
----
-
-## 3️⃣ ansible/ —— 把“声明”变成现实
+## ansible/ —— 把“声明”变成现实
 
 Ansible 在这个 repo 里只干一件事：
 
@@ -62,7 +42,7 @@ ansible-playbook ansible/site.yml --ask-vault-pass
 
 ---
 
-## 4️⃣ docs/ —— 这是你“未来不骂过去自己的保险”
+## docs/ —— 这是你“未来不骂过去自己的保险”
 
 这里不是给 `Ansible` 用的，是给 `人` 用的。
 
@@ -77,7 +57,7 @@ decisions/（当初为什么这样设计 ACL）
 ---
 
 
-## 5️⃣ scripts/ —— 防止“无意识作死”
+## scripts/ —— 防止“无意识作死”
 
 这些脚本不是必须，但非常值：
 
