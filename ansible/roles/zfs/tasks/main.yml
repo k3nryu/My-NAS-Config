@@ -1,0 +1,34 @@
+- name: install zfs repo
+  dnf:
+    name: https://zfsonlinux.org/epel/zfs-release.el8.noarch.rpm
+    state: present
+  when: ansible_distribution_major_version == "8"
+
+- name: install zfs packages
+  dnf:
+    name:
+      - zfs
+      - sanoid
+    state: present
+
+- name: enable zfs services
+  service:
+    name: zfs-import-cache
+    enabled: true
+
+- name: check zpool exists
+  command: zpool list {{ zfs_pool_name }}
+  register: zpool_check
+  failed_when: false
+  changed_when: false
+
+- name: create zpool (ONLY IF NOT EXISTS)
+  command: >
+    zpool create {{ zfs_pool_name }}
+    mirror {{ zfs_pool_devices | join(' ') }}
+  when: zpool_check.rc != 0
+
+- name: ensure zfs mountpoint
+  command: zfs set mountpoint={{ zfs_mountpoint }} {{ zfs_pool_name }}
+  when: zpool_check.rc == 0
+

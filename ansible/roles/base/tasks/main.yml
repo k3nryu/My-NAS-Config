@@ -1,0 +1,21 @@
+- name: install base packages
+  dnf:
+    name:
+      - vim
+      - git
+      - rsync
+      - curl
+      - wget
+      - policycoreutils-python-utils
+    state: present
+
+- name: enable sshd
+  service:
+    name: sshd
+    enabled: true
+    state: started
+
+- name: set timezone
+  timezone:
+    name: Asia/Tokyo
+

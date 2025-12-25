@@ -1,0 +1,24 @@
+nas_role: true
+
+# ZFS
+zfs_pool_name: tank
+zfs_pool_devices:
+  - /dev/disk/by-id/wwn-0x5000c500f22d731f
+  - /dev/disk/by-id/wwn-0x5000c500f7307499
+zfs_mountpoint: /share
+
+# Services
+enable_samba: true
+enable_nfs: true
+enable_nginx: true
+enable_apache_webdav: true
+enable_docker: true
+enable_cloudflared: true
+
+# Docker reverse proxy targets（示例）
+nginx_proxy_services:
+  - name: homeassistant
+    server: 127.0.0.1:8123
+  - name: vaultwarden
+    server: 127.0.0.1:8081
+

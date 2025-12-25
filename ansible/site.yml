@@ -1,0 +1,15 @@
+- hosts: nas
+  become: true
+
+  roles:
+    - base
+    - zfs
+    - firewalld
+
+    - { role: samba, when: enable_samba }
+    - { role: nfs, when: enable_nfs }
+    - { role: docker, when: enable_docker }
+    - { role: nginx, when: enable_nginx }
+    - { role: apache_webdav, when: enable_apache_webdav }
+    - { role: cloudflared, when: enable_cloudflared }
+
