@@ -87,15 +87,24 @@ git clone https://github.com/k3nryu/My-NAS-Config.git
 cd My-NAS-Config
 ```
 
-4. 跑 Ansible
+4. 先导入已有 ZFS pool
+```
+zpool import
+zpool import tank
+zpool status tank
+```
+
+5. 跑 Ansible
 ```
 ansible-playbook ansible/site.yml --ask-vault-pass
 ```
 
-5. 导入 ZFS
-```
-zpool import tank
-```
-
 👉 恢复结束
 这就是这个 repo 的 KPI。
+
+更完整的恢复文档：
+
+- `docs/inventory.md`
+- `docs/disaster-recovery.md`
+- `docs/recovery-checklist.md`
+- `docs/restore-drill.md`
